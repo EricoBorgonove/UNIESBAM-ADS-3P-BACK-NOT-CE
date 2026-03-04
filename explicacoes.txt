@@ -1,0 +1,11 @@
+// para baixar o repositório em suas casas:
+// crie uma pasta em algum lugar do computador.
+// abra a pasta no terminal do ubuntu ou gitbash ou terminal do laragon
+
+git init 
+git pull https://github.com/EricoBorgonove/UNIESBAM-ADS-3P-BACK-NOT-CE.git
+tm -rf . git
+npm i
+code .
+
+// bons estudos
