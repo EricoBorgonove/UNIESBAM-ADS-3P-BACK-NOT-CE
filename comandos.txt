@@ -1,0 +1,5 @@
+sequelize migration:generate --name drop-users-table 
+sequelize db:migrate
+sequelize model:generate --name Users --attributes 
+nome:string,cpf:string,email:string,senha:string,
+tipo_usuario:string
