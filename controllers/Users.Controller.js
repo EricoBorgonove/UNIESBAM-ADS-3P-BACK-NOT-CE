@@ -25,4 +25,17 @@ module.exports = {
                 error: error.message });
         }
     },
+    //READ: Listar todos os Usuários
+
+    async gelAllUsers (req, res){
+        try {
+            const users = await Users.findAll({
+                attributes: { exclude: ['senha']}
+            })
+            return res.json(users);
+        } catch (error) {
+                return res.status(500).json({message: 'Erro ao listar usuarios',
+                error: error.message });
+        }
+    }
 }
