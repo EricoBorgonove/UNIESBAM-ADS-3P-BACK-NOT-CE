@@ -37,5 +37,54 @@ module.exports = {
                 return res.status(500).json({message: 'Erro ao listar usuarios',
                 error: error.message });
         }
+    },
+    //READ - Buscar usuário por ID
+    async getUserById(req, res){
+        try {
+            const { id } = req.params;
+            const user = await Users.findByPk(id, {
+                attributes: { exclude: ['senha']}
+            })
+            if (!user) return res.status(404).json ({message: 'Usuário não encontrado'});
+            await Users.update({nome, cpf, email, senha, tipo_usuario});
+            return res.status(201);
+        } catch (error) {
+            return res.status(500).json({message: 'Erro ao buscar usuarios',
+                error: error.message });
+        }
+    },
+    //UPDATE - Atualizar o usuário
+    async updateUser (req, res){
+        try {
+            const { id } = req.params;
+            const {nome, cpf, email, senha, tipo_usuario} = req.body;
+            if(!['admin', 'user', 'dev'].includes(tipo_usuario)){
+                return res.status(400).json (
+                    {message: "tipo de usuário inválido"});
+            }
+            const user = await Users.findByPk(id, {
+                attributes: { exclude: ['senha']}
+            })
+            if (!user) return res.status(404).json ({message: 'Usuário não encontrado'});
+            res.json(user);
+        } catch (error) {
+            return res.status(500).json({message: 'Erro ao buscar usuarios',
+                error: error.message });
+        }
+    },
+    //DELETE - Remover usuário
+    async deleteUser (req, res){
+        try {
+            const { id } = req.params;
+            const user = await Users.findByPk(id, {
+                attributes: { exclude: ['senha']}
+            })
+            if (!user) return res.status(404).json ({message: 'Usuário não encontrado'});
+            await Users.update({nome, cpf, email, senha, tipo_usuario});
+            return res.status(201);
+        } catch (error) {
+            return res.status(500).json({message: 'Erro ao buscar usuarios',
+                error: error.message });
+        }
     }
 }
