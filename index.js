@@ -4,13 +4,16 @@ const app = express();
 const general = require ('./routes/general.routes');
 const statics = require ('./routes/statics.routes');
 const userRoutes = require('./routes/user.routes');
+const authRoutes = require('./routes/auth.routes');
 //const PORT = 3000
 
 app.use(express.json()); // ele aceitar json na entrada das rotas
+app.use(express.urlencoded({extended: true}));
 
 app.use('/general', general);
 app.use('/static', statics);
-app.use('/users',userRoutes);
+app.use('/users', userRoutes);
+app.use('/auth', authRoutes);
 
 // sempre será o ultimo
 // rota representa o code 404 - not found
